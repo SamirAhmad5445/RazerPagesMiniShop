@@ -1,0 +1,64 @@
+﻿@page
+@using RazerPagesMiniShop.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="overview">
+  <div class="title d-flex mb-2">
+    <div>
+      <i class="uil uil-tachometer-fast-alt"></i>
+      <span class="text">All Product</span>
+    </div>
+    <div class="ms-auto">
+      <a class="btn btn-outline-primary" asp-page="Create">
+        <i class="uil uil-plus"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td class="table-light">id</td>
+        <td class="table-light">Name</td>
+        <td class="table-light">Description</td>
+        <td class="table-light">price</td>
+        <td class="table-light">Quantity</td>
+        <td class="table-light">Company</td>
+        <td class="table-light">operation</td>
+      </tr>
+    </thead>
+    <tbody>
+      @{
+        foreach (Product product in Model.products)
+        {
+          <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Description</td>
+            <td>@product.Price</td>
+            <td>@product.company.Name</td>
+            <td>@product.Quantity</td>
+            <td>
+              <div class="actions">
+
+                <a class="btn btn-success" asp-page="Edit" asp-route-id="@product.Id">
+                  <i class="uil uil-edit"></i>
+                </a>
+
+                <form class="d-inline" asp-page="Index" asp-page-handler="Delete" asp-route-id="@product.Id">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="uil uil-trash-alt"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+         }
+      }
+    </tbody>
+  </table>
+</div>
